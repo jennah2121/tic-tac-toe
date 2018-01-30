@@ -1,3 +1,6 @@
+//global variables
+var playerTurn = 'X';
+
 document.addEventListener("DOMContentLoaded", function() {
   //set up the canvas
   var canvas = document.querySelector('#canvas');
@@ -59,5 +62,22 @@ function whereClicked(ctx) {
     y = 250;
   } else {
     y = 395;
+  }
+
+  makeMove(x, y, ctx);
+}
+
+//Draws an X or O to canvas depending on whose turn it is
+function makeMove(x, y, ctx) {
+  ctx.font = '60px helvetica';
+
+  if(playerTurn == 'X') {
+    ctx.fillText('X', x, y);
+    playerTurn = 'O';
+    document.querySelector('#turn').innerHTML = 'O\'s ';
+  } else {
+    ctx.fillText('O', x, y);
+    playerTurn = 'X';
+    document.querySelector('#turn').innerHTML = 'X\'s ';
   }
 }
