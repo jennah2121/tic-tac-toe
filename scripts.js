@@ -1,6 +1,7 @@
 //global variables
 var playerTurn = 'X';
 var board = [[],[],[]];
+var winner = 'Draw';
 
 document.addEventListener("DOMContentLoaded", function() {
   //set up the canvas
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
   //add a click event listener to canvas
   canvas.addEventListener('click', function() {
     whereClicked(ctx);
+    if(checkWin(board)) this.removeEventListener('click', arguments.callee);
   });
 });
 
@@ -96,4 +98,48 @@ function makeMove(x, y, ctx, boardX, boardY) {
     playerTurn = 'X';
     document.querySelector('#turn').innerHTML = 'X\'s ';
   }
+}
+
+//Add win functionality
+function checkWin(board) {
+
+  //check for horizontal win
+  for(var i=0; i < 3; i++) {
+    var string = board[i].join("");
+    if(string === 'XXX' || string === 'OOO') {
+      winner = string[0];
+      return true;
+    }
+  }
+
+  //check for vertical win
+  for(var j=0; j < 3; j++) {
+    var holder = [];
+    for(var k=0; k < 3; k++) {
+      holder.push(board[k][j]);
+    }
+    if(holder.join('') == 'XXX' || holder.join('') == 'OOO') {
+      winner = holder[0];
+      return true;
+    }
+  }
+
+  //check for diagonal win
+  var diag1 = [];
+  diag1.push(board[0][0], board[1][1], board[2][2]);
+  if(diag1.join('') == 'XXX' || diag1.join('') == 'OOO') {
+    winner = diag1[0];
+    return true;
+  }
+
+  var diag2 = [];
+  diag2.push(board[2][0], board[1][1], board[0][2]);
+  if(diag2.join('') == 'XXX' || diag2.join('') == 'OOO') {
+    winner = diag2[0];
+    return true;
+  }
+
+  //handle no win
+  var gameState = [...board[0], ...board[1], ...board[2]];
+  if(gameState.join('').length == 9) return true;
 }
