@@ -113,7 +113,7 @@ function checkWin(board) {
     var string = board[i].join("");
     if(string === 'XXX' || string === 'OOO') {
       winner = string[0];
-      return true;
+      return `horizontal${i}`;
     }
   }
 
@@ -125,7 +125,7 @@ function checkWin(board) {
     }
     if(holder.join('') == 'XXX' || holder.join('') == 'OOO') {
       winner = holder[0];
-      return true;
+      return `vertical${j}`;
     }
   }
 
@@ -134,17 +134,17 @@ function checkWin(board) {
   diag1.push(board[0][0], board[1][1], board[2][2]);
   if(diag1.join('') == 'XXX' || diag1.join('') == 'OOO') {
     winner = diag1[0];
-    return true;
+    return `diag1`;
   }
 
   var diag2 = [];
   diag2.push(board[2][0], board[1][1], board[0][2]);
   if(diag2.join('') == 'XXX' || diag2.join('') == 'OOO') {
     winner = diag2[0];
-    return true;
+    return `diag2`;
   }
 
   //handle no win
   var gameState = [...board[0], ...board[1], ...board[2]];
-  if(gameState.join('').length == 9) return true;
+  if(gameState.join('').length == 9) return `draw`;
 }
