@@ -93,16 +93,18 @@ function whereClicked(ctx) {
 function makeMove(x, y, ctx, boardX, boardY) {
   ctx.font = '60px Permanent Marker';
 
-  if(playerTurn == 'X') {
-    ctx.fillText('X', x, y);
-    board[boardY][boardX] = 'X';
-    playerTurn = 'O';
-    document.querySelector('#turn').innerHTML = 'O\'s turn ';
-  } else {
-    ctx.fillText('O', x, y);
-    board[boardY][boardX] = 'O';
-    playerTurn = 'X';
-    document.querySelector('#turn').innerHTML = 'X\'s turn ';
+if(!board[boardY][boardX]) {
+    if(playerTurn == 'X') {
+      ctx.fillText('X', x, y);
+      board[boardY][boardX] = 'X';
+      playerTurn = 'O';
+      document.querySelector('#turn').innerHTML = 'O\'s turn ';
+    } else {
+      ctx.fillText('O', x, y);
+      board[boardY][boardX] = 'O';
+      playerTurn = 'X';
+      document.querySelector('#turn').innerHTML = 'X\'s turn ';
+    }
   }
 }
 
