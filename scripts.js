@@ -40,7 +40,12 @@ document.addEventListener("DOMContentLoaded", function() {
   //add a click event listener to canvas
   canvas.addEventListener('click', function() {
     whereClicked(ctx);
-    if(checkWin(board)) this.removeEventListener('click', arguments.callee);
+    var win = checkWin(board);
+
+    if(win) {
+      this.removeEventListener('click', arguments.callee);
+    }
+
   });
 });
 
