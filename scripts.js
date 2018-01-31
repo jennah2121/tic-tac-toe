@@ -1,7 +1,7 @@
 //global variables
 var playerTurn = 'X';
 var board = [[],[],[]];
-var winner = 'Draw';
+var winner = 'No one';
 
 document.addEventListener("DOMContentLoaded", function() {
   //set up the canvas
@@ -97,12 +97,12 @@ function makeMove(x, y, ctx, boardX, boardY) {
     ctx.fillText('X', x, y);
     board[boardY][boardX] = 'X';
     playerTurn = 'O';
-    document.querySelector('#turn').innerHTML = 'O\'s ';
+    document.querySelector('#turn').innerHTML = 'O\'s turn ';
   } else {
     ctx.fillText('O', x, y);
     board[boardY][boardX] = 'O';
     playerTurn = 'X';
-    document.querySelector('#turn').innerHTML = 'X\'s ';
+    document.querySelector('#turn').innerHTML = 'X\'s turn ';
   }
 }
 
@@ -189,4 +189,6 @@ function displayWin(winType, ctx) {
   ctx.lineTo(x2, y2);
   ctx.stroke();
   ctx.closePath();
+
+  document.querySelector('#turn').innerHTML = `${winner} wins!!`;
 }
