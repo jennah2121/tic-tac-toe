@@ -215,4 +215,6 @@ function endGame(ctx) {
   ctx.font = '35px Londrina Shadow';
   ctx.fillStyle = 'red';
   if(loser) ctx.fillText(`${loser} loses`, canvas.width/2, 380);
+
+  document.querySelector('#turn').style.visibility = 'hidden';
 }
