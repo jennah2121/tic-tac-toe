@@ -1,7 +1,7 @@
 //global variables
 var playerTurn = 'X';
 var board = [[],[],[]];
-var winner = 'No one';
+var winner = 'No One';
 
 document.addEventListener("DOMContentLoaded", function() {
   //set up the canvas
@@ -191,4 +191,28 @@ function displayWin(winType, ctx) {
   ctx.closePath();
 
   document.querySelector('#turn').innerHTML = `${winner} wins!!`;
+
+  setTimeout(endGame, 1350, ctx);
+}
+
+/*
+  endGame() - redraws the canvas to show which player won
+*/
+function endGame(ctx) {
+  var loser;
+
+  if(winner == 'X') loser = 'O';
+  if(winner == 'O') loser = 'X';
+
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'limegreen';
+  ctx.textAlign = 'center';
+  ctx.font = '150px londrina Shadow';
+  ctx.fillText(`${winner}`, canvas.width/2, 200);
+  ctx.font = '90px londrina Shadow';
+  ctx.fillText('WINS!!', canvas.width/2, 300);
+  ctx.font = '35px Londrina Shadow';
+  ctx.fillStyle = 'red';
+  if(loser) ctx.fillText(`${loser} loses`, canvas.width/2, 380);
 }
