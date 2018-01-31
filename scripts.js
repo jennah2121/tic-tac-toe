@@ -33,6 +33,7 @@ function init() {
 
   ctx.lineCap = 'round';
   ctx.strokeStyle = 'black';
+  ctx.fillStyle = 'black';
   ctx.lineWidth = 4;
   ctx.textAlign = 'start';
 
