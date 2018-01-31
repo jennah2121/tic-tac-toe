@@ -4,13 +4,37 @@ var board = [[],[],[]];
 var winner = 'No One';
 
 document.addEventListener("DOMContentLoaded", function() {
+var restart = document.querySelector('#restart');
+ restart.addEventListener('click', function() {
+   init();
+ });
+
+ init();
+});
+
+/* FUNCTIONS */
+
+
+/*
+  init() - Runs as soon as the DOM loads or if user wants to restart
+*/
+function init() {
+  //reset certain variables/values for purposes of new game
+  board = [[],[],[]];
+  playerTurn = 'X';
+  winner = 'No One';
+  document.querySelector('#turn').style.visibility = 'visible';
+  document.querySelector('#turn').innerHTML = 'X starts';
+
   //set up the canvas
   var canvas = document.querySelector('#canvas');
   var ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0,canvas.width, canvas.height);
 
   ctx.lineCap = 'round';
   ctx.strokeStyle = 'black';
   ctx.lineWidth = 4;
+  ctx.textAlign = 'start';
 
   //draw the starting game board - vetical lines followed by horizontal
   ctx.beginPath();
@@ -46,11 +70,8 @@ document.addEventListener("DOMContentLoaded", function() {
       this.removeEventListener('click', arguments.callee);
       displayWin(win, ctx);
     }
-
   });
-});
-
-/* FUNCTIONS */
+}
 
 /*
   whereCLicked
