@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if(win) {
       this.removeEventListener('click', arguments.callee);
+      displayWin(win, ctx);
     }
 
   });
@@ -147,4 +148,45 @@ function checkWin(board) {
   //handle no win
   var gameState = [...board[0], ...board[1], ...board[2]];
   if(gameState.join('').length == 9) return `draw`;
+}
+
+/*
+  displayWin() - draws a line to show where the win was on the board
+  the switch sets the start(x1, y1) and end(x2, y2) points for the line
+*/
+function displayWin(winType, ctx) {
+  var x1, y1, x2, y2;
+  switch(winType) {
+    case 'horizontal0':
+      x1 = 50; y1 = 73; x2 = 405; y2 = 73;
+      break;
+    case 'horizontal1':
+      x1 = 50; y1 = 227; x2 = 405; y2 = 227;
+      break;
+    case 'horizontal2':
+      x1 = 50; y1 = 370; x2 = 405; y2 = 370;
+      break;
+    case 'vertical0':
+      x1 = 75; y1 = 40; x2 = 75; y2 = 405;
+      break;
+    case 'vertical1':
+      x1 = 225; y1 = 40; x2 = 225; y2 = 405;
+      break;
+    case 'vertical2':
+      x1 = 375; y1 = 40; x2 = 375; y2 = 405;
+      break;
+    case 'diag1':
+      x1 = 40; y1 = 40; x2 = 410; y2 = 410;
+      break;
+    case 'diag2':
+      x1 = 410; y1 = 40; x2 = 40; y2 = 410;
+      break;
+  }
+
+  ctx.strokeStyle = 'red';
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  ctx.closePath();
 }
