@@ -91,7 +91,7 @@ function whereClicked(ctx) {
 
 //Draws an X or O to canvas depending on whose turn it is & updates board array
 function makeMove(x, y, ctx, boardX, boardY) {
-  ctx.font = '60px helvetica';
+  ctx.font = '60px Permanent Marker';
 
   if(playerTurn == 'X') {
     ctx.fillText('X', x, y);
