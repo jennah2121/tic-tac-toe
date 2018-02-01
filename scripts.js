@@ -217,6 +217,7 @@ function displayWin(winType, ctx) {
   document.querySelector('#turn').innerHTML = `${winner} wins!!`;
 
   setTimeout(endGame, 1350, ctx);
+  setTimeout(showCircles);
 }
 
 /*
@@ -241,4 +242,20 @@ function endGame(ctx) {
   if(loser) ctx.fillText(`${loser} loses`, canvas.width/2, 380);
 
   document.querySelector('#turn').style.visibility = 'hidden';
+}
+
+/*
+  showCircles() - displays floating circles with the winner inside
+*/
+
+function showCircles() {
+  var circles = document.querySelectorAll('.circle');
+  var num = -1;
+  for(var circle of circles) {
+    var speeds = ['2.5s', '4s', '3s', '3.75s', '2s', '3s'];
+    num++;
+    circle.style.visibility = 'visible';
+    circle.style.animation = `riseUp ${speeds[num]} infinite alternate linear`;
+    winner == 'No One' ? circle.innerHTML = winner : circle.innerHTML = `${winner} wins!`
+  }
 }
