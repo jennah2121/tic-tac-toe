@@ -9,3 +9,21 @@ body {
 h1 {
   text-decoration: underline double;
 }
+
+#restart {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 0px 0px lightGrey;
+}
+
+#restart:active {
+  box-shadow: none;
+  transform: translate(0px, 2px);
+}
+
+#restart:focus {
+  outline: none;
+}
