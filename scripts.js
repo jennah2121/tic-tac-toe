@@ -26,6 +26,14 @@ function init() {
   document.querySelector('#turn').style.visibility = 'visible';
   document.querySelector('#turn').innerHTML = 'X starts';
 
+  //reset and hide the circles
+  var circles = document.querySelectorAll('.circle');
+  for(var circle of circles) {
+    console.log('circles reset');
+    circle.style.visibility = 'hidden';
+    circle.style.animation = 'none';
+  }
+
   //set up the canvas
   var canvas = document.querySelector('#canvas');
   var ctx = canvas.getContext('2d');
