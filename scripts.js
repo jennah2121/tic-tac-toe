@@ -113,7 +113,7 @@ function whereClicked(ctx) {
 
 //Draws an X or O to canvas depending on whose turn it is & updates board array
 function makeMove(x, y, ctx, boardX, boardY) {
-  ctx.font = '60px Permanent Marker';
+  ctx.font = '80px Amatic Sc';
 
 if(!board[boardY][boardX]) {
     if(playerTurn == 'X') {
@@ -228,7 +228,7 @@ function endGame(ctx) {
   if(winner == 'X') loser = 'O';
   if(winner == 'O') loser = 'X';
 
-  ctx.fillStyle = 'black';
+  ctx.fillStyle = 'linen';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = 'limegreen';
   ctx.textAlign = 'center';
@@ -236,7 +236,7 @@ function endGame(ctx) {
   ctx.fillText(`${winner}`, canvas.width/2, 200);
   ctx.font = '90px londrina Shadow';
   ctx.fillText('WINS!!', canvas.width/2, 300);
-  ctx.font = '35px Londrina Shadow';
+  ctx.font = '35px Amatic SC';
   ctx.fillStyle = 'red';
   if(loser) ctx.fillText(`${loser} loses`, canvas.width/2, 380);
 
