@@ -182,32 +182,32 @@ function displayWin(winType, ctx) {
   var x1, y1, x2, y2;
   switch(winType) {
     case 'horizontal0':
-      x1 = 50; y1 = 73; x2 = 405; y2 = 73;
+      x1 = 45; y1 = 63; x2 = 385; y2 = 63;
       break;
     case 'horizontal1':
-      x1 = 50; y1 = 227; x2 = 405; y2 = 227;
+      x1 = 45; y1 = 217; x2 = 385; y2 = 217;
       break;
     case 'horizontal2':
-      x1 = 50; y1 = 370; x2 = 405; y2 = 370;
+      x1 = 45; y1 = 363; x2 = 385; y2 = 363;
       break;
     case 'vertical0':
-      x1 = 75; y1 = 40; x2 = 75; y2 = 405;
+      x1 = 68; y1 = 30; x2 = 68; y2 = 415;
       break;
     case 'vertical1':
-      x1 = 225; y1 = 40; x2 = 225; y2 = 405;
+      x1 = 218; y1 = 30; x2 = 218; y2 = 415;
       break;
     case 'vertical2':
-      x1 = 375; y1 = 40; x2 = 375; y2 = 405;
+      x1 = 368; y1 = 30; x2 = 368; y2 = 415;
       break;
     case 'diag1':
       x1 = 40; y1 = 40; x2 = 410; y2 = 410;
       break;
     case 'diag2':
-      x1 = 410; y1 = 40; x2 = 40; y2 = 410;
+      x1 = 400; y1 = 30; x2 = 30; y2 = 400;
       break;
   }
 
-  ctx.strokeStyle = 'red';
+  ctx.strokeStyle = 'limegreen';
   ctx.beginPath();
   ctx.moveTo(x1, y1);
   ctx.lineTo(x2, y2);
