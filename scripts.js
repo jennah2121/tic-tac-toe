@@ -23,7 +23,6 @@ var restart = document.querySelector('#restart');
    //reset and hide the circles
    var circles = document.querySelectorAll('.circle');
    for(var circle of circles) {
-     console.log('circles reset');
      circle.style.visibility = 'hidden';
      circle.style.animation = 'none';
    }
