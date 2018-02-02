@@ -2,8 +2,13 @@
 var playerTurn = 'X';
 var board = [[],[],[]];
 var winner = 'No One';
+var canvas;
+var ctx;
 
 document.addEventListener("DOMContentLoaded", function() {
+  canvas = document.querySelector('#canvas');
+  ctx = canvas.getContext('2d');
+
 var restart = document.querySelector('#restart');
  restart.addEventListener('click', function() {
    init();
@@ -35,8 +40,6 @@ function init() {
   }
 
   //set up the canvas
-  var canvas = document.querySelector('#canvas');
-  var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0,canvas.width, canvas.height);
 
   ctx.lineCap = 'round';
@@ -72,12 +75,12 @@ function init() {
 
   //add a click event listener to canvas
   canvas.addEventListener('click', function() {
-    whereClicked(ctx);
+    whereClicked();
     var win = checkWin(board);
 
     if(win) {
       this.removeEventListener('click', arguments.callee);
-      displayWin(win, ctx);
+      displayWin(win);
     }
   });
 }
@@ -87,7 +90,7 @@ function init() {
   determines where the user clicked on the canvas and set the x and y values accordingly
   also uses the new x and y to determine how the board array should be updated
 */
-function whereClicked(ctx) {
+function whereClicked() {
   var x = event.clientX - canvas.offsetLeft;
   var y = event.clientY - canvas.offsetTop;
 
@@ -116,11 +119,11 @@ function whereClicked(ctx) {
     boardY = 2;
   }
 
-  makeMove(x, y, ctx, boardX, boardY);
+  makeMove(x, y, boardX, boardY);
 }
 
 //Draws an X or O to canvas depending on whose turn it is & updates board array
-function makeMove(x, y, ctx, boardX, boardY) {
+function makeMove(x, y, boardX, boardY) {
   ctx.font = '80px Amatic Sc';
 
 if(!board[boardY][boardX]) {
@@ -186,7 +189,7 @@ function checkWin(board) {
   displayWin() - draws a line to show where the win was on the board
   the switch sets the start(x1, y1) and end(x2, y2) points for the line
 */
-function displayWin(winType, ctx) {
+function displayWin(winType) {
   var x1, y1, x2, y2;
   switch(winType) {
     case 'horizontal0':
@@ -231,7 +234,7 @@ function displayWin(winType, ctx) {
 /*
   endGame() - redraws the canvas to show which player won
 */
-function endGame(ctx) {
+function endGame() {
   var loser;
 
   if(winner == 'X') loser = 'O';
