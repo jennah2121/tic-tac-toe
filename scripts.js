@@ -4,6 +4,7 @@ var board = [[],[],[]];
 var winner = 'No One';
 var canvas;
 var ctx;
+var mode;
 
 document.addEventListener("DOMContentLoaded", function() {
   canvas = document.querySelector('#canvas');
@@ -14,10 +15,42 @@ var restart = document.querySelector('#restart');
    init();
  });
 
- init();
+ gameChoices();
 });
 
 /* FUNCTIONS */
+
+/*
+  gameChoices() - Lets user chose to play against the PC or with a friend
+*/
+function gameChoices() {
+  //Using canvas ask the player who they will play with
+  ctx.clearRect(0, 0,canvas.width, canvas.height);
+  ctx.fillStyle = 'linen';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'black';
+  ctx.textAlign = 'center';
+  ctx.font = '50.5px Amatic sc';
+  ctx.fillText(`Welcome to Tic Tac Toe!`, canvas.width/2, 100);
+  ctx.fillText(`Who will you play with?`, canvas.width/2, 200);
+
+  ctx.shadowColor = 'lightGrey';
+  ctx.shadowOffsetY = 4;
+  ctx.shadowBlur = 2;
+  ctx.fillStyle = 'lavender';
+  ctx.fillRect(75, 260, 125, 40);
+  ctx.fillRect(260, 260, 125, 40);
+
+  ctx.fillStyle = 'black';
+  ctx.font = '30px Amatic sc';
+  ctx.shadowOffsetY = 0;
+  ctx.fillText(`A friend`, 137, 290);
+  ctx.fillText(`The PC`, 322, 290);
+
+  //Add a click event listener to determine which mode was chosen
+  canvas.addEventListener('click', chosenMode);
+}
+
 
 
 /*
