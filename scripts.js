@@ -108,7 +108,21 @@ function whichbutton() {
   if(x >= 262 && x <= 381 && y >= 262 && y <= 297) return 'right';
 }
 
+function iconSelection() {
+  playerIcon = whichbutton();
 
+  if(playerIcon) {
+      playerIcon == 'left' ? (playerTurn = 'O', playerIcon = 'X' ): (playerTurn = 'X', playerIcon = 'O');
+      this.removeEventListener('click', arguments.callee);
+      ctx.fillStyle = 'linen';
+      ctx.fillRect(0,0, canvas.width, canvas.height);
+      ctx.fillStyle = 'black';
+      ctx.font = '45px Amatic sc';
+      ctx.fillText('You are playing with the PC', canvas.width/2, 150);
+      ctx.fillText(`You chose to be ${playerIcon}`, canvas.width/2, 250);
+      setTimeout(init, 2000);
+    }
+}
 
 
 
