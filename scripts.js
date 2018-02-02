@@ -12,7 +12,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
 var restart = document.querySelector('#restart');
  restart.addEventListener('click', function() {
-   init();
+   //reset certain variables for purposes of new game
+   board = [[],[],[]];
+   playerTurn = 'X';
+   winner = 'No One';
+
+   document.querySelector('#turn').style.visibility = 'visible';
+   document.querySelector('#turn').innerHTML = 'X starts';
+
+   //reset and hide the circles
+   var circles = document.querySelectorAll('.circle');
+   for(var circle of circles) {
+     console.log('circles reset');
+     circle.style.visibility = 'hidden';
+     circle.style.animation = 'none';
+   }
+   gameChoices();
  });
 
  gameChoices();
@@ -130,21 +145,6 @@ function iconSelection() {
   init() - Runs as soon as the DOM loads or if user wants to restart
 */
 function init() {
-  //reset certain variables/values for purposes of new game
-  board = [[],[],[]];
-  playerTurn = 'X';
-  winner = 'No One';
-  document.querySelector('#turn').style.visibility = 'visible';
-  document.querySelector('#turn').innerHTML = 'X starts';
-
-  //reset and hide the circles
-  var circles = document.querySelectorAll('.circle');
-  for(var circle of circles) {
-    console.log('circles reset');
-    circle.style.visibility = 'hidden';
-    circle.style.animation = 'none';
-  }
-
   //set up the canvas
   ctx.clearRect(0, 0,canvas.width, canvas.height);
 
