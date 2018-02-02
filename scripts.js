@@ -77,6 +77,7 @@ function chosenMode() {
 
     //set the game up for playing with a friend
     if(mode == 'friend') {
+      this.removeEventListener('click', chosenMode);
       ctx.fillStyle = 'linen';
       ctx.fillRect(0,0, canvas.width, canvas.height);
       ctx.fillStyle = 'black';
