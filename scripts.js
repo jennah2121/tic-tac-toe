@@ -87,14 +87,14 @@ function chosenMode() {
       ctx.shadowOffsetY = 4;
       ctx.shadowBlur = 2;
       ctx.fillStyle = 'lavender';
-      ctx.fillRect(75, 240, 125, 40);
-      ctx.fillRect(260, 240, 125, 40);
+      ctx.fillRect(75, 260, 125, 40);
+      ctx.fillRect(260, 260, 125, 40);
 
       ctx.fillStyle = 'black';
       ctx.font = '30px Amatic sc';
       ctx.shadowOffsetY = 0;
-      ctx.fillText(`X`, 137, 270);
-      ctx.fillText(`O`, 322, 270);
+      ctx.fillText(`X`, 137, 290);
+      ctx.fillText(`O`, 322, 290);
 
       this.addEventListener('click', iconSelection);
     }
