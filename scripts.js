@@ -76,7 +76,7 @@ function init() {
   //add a click event listener to canvas
   canvas.addEventListener('click', function() {
     whereClicked();
-    var win = checkWin(board);
+    var win = checkWin();
 
     if(win) {
       this.removeEventListener('click', arguments.callee);
@@ -142,7 +142,7 @@ if(!board[boardY][boardX]) {
 }
 
 //Add win functionality
-function checkWin(board) {
+function checkWin() {
 
   //check for horizontal win
   for(var i=0; i < 3; i++) {
