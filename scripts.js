@@ -51,6 +51,65 @@ function gameChoices() {
   canvas.addEventListener('click', chosenMode);
 }
 
+/*
+  chosenMode() - run the game depending on the users chosen mode
+*/
+function chosenMode() {
+  mode = whichbutton();
+
+  if(mode) {
+    mode == 'left' ? mode = 'friend' : mode = 'pc';
+
+    //set the game up for playing with a friend
+    if(mode == 'friend') {
+      ctx.fillStyle = 'linen';
+      ctx.fillRect(0,0, canvas.width, canvas.height);
+      ctx.fillStyle = 'black';
+      ctx.font = '45px Amatic sc';
+      ctx.fillText('You are playing with a friend', canvas.width/2, 150);
+      ctx.fillText('X will go first', canvas.width/2, 250);
+      setTimeout(init, 2000);
+    }
+
+    if(mode == 'pc') {
+      //remove the old click listener so the next choice can be correctly identified
+      this.removeEventListener('click', chosenMode);
+
+      //Ask user to chose their icon
+      ctx.fillStyle = 'linen';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'black';
+      ctx.textAlign = 'center';
+      ctx.font = '50.5px Amatic sc';
+      ctx.fillText(`Will you play as X or O?`, canvas.width/2, 150);
+
+      ctx.shadowColor = 'lightGrey';
+      ctx.shadowOffsetY = 4;
+      ctx.shadowBlur = 2;
+      ctx.fillStyle = 'lavender';
+      ctx.fillRect(75, 240, 125, 40);
+      ctx.fillRect(260, 240, 125, 40);
+
+      ctx.fillStyle = 'black';
+      ctx.font = '30px Amatic sc';
+      ctx.shadowOffsetY = 0;
+      ctx.fillText(`X`, 137, 270);
+      ctx.fillText(`O`, 322, 270);
+
+      this.addEventListener('click', iconSelection);
+    }
+  }
+}
+
+function whichbutton() {
+  var x = event.clientX-event.target.offsetLeft;
+  var y = event.clientY - event.target.offsetTop;
+  if(x >= 77 && x <= 197 && y >= 262 && y <= 297) return 'left';
+  if(x >= 262 && x <= 381 && y >= 262 && y <= 297) return 'right';
+}
+
+
+
 
 
 /*
