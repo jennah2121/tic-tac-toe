@@ -191,7 +191,7 @@ function init() {
   //add a click event listener to canvas
   canvas.addEventListener('click', function() {
     whereClicked();
-    var win = checkWin();
+    var win = checkWin(board);
 
     if(win) {
       this.removeEventListener('click', arguments.callee);
@@ -203,7 +203,7 @@ function init() {
       // ensures that the PC moves after the player until game over
       if(isPC) {
         whereClicked();
-        var win = checkWin();
+        var win = checkWin(board);
 
         if(win) {
           this.removeEventListener('click', arguments.callee);
@@ -286,11 +286,11 @@ if(!board[boardY][boardX]) {
 }
 
 //Add win functionality
-function checkWin() {
+function checkWin(checkBoard) {
 
   //check for horizontal win
   for(var i=0; i < 3; i++) {
-    var string = board[i].join("");
+    var string = checkBoard[i].join("");
     if(string === 'XXX' || string === 'OOO') {
       winner = string[0];
       return `horizontal${i}`;
@@ -301,7 +301,7 @@ function checkWin() {
   for(var j=0; j < 3; j++) {
     var holder = [];
     for(var k=0; k < 3; k++) {
-      holder.push(board[k][j]);
+      holder.push(checkBoard[k][j]);
     }
     if(holder.join('') == 'XXX' || holder.join('') == 'OOO') {
       winner = holder[0];
@@ -311,21 +311,21 @@ function checkWin() {
 
   //check for diagonal win
   var diag1 = [];
-  diag1.push(board[0][0], board[1][1], board[2][2]);
+  diag1.push(checkBoard[0][0], checkBoard[1][1], checkBoard[2][2]);
   if(diag1.join('') == 'XXX' || diag1.join('') == 'OOO') {
     winner = diag1[0];
     return `diag1`;
   }
 
   var diag2 = [];
-  diag2.push(board[2][0], board[1][1], board[0][2]);
+  diag2.push(checkBoard[2][0], checkBoard[1][1], checkBoard[0][2]);
   if(diag2.join('') == 'XXX' || diag2.join('') == 'OOO') {
     winner = diag2[0];
     return `diag2`;
   }
 
   //handle no win
-  var gameState = [...board[0], ...board[1], ...board[2]];
+  var gameState = [...checkBoard[0], ...checkBoard[1], ...checkBoard[2]];
   if(gameState.join('').length == 9) return `draw`;
 }
 
