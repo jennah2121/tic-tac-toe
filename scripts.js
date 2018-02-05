@@ -198,16 +198,18 @@ function init() {
       displayWin(win);
     }
 
-    // ensures that the PC moves after the player until game over
-    if(isPC) {
-      whereClicked();
-      var win = checkWin();
+    setTimeout(function(){
+      // ensures that the PC moves after the player until game over
+      if(isPC) {
+        whereClicked();
+        var win = checkWin();
 
-      if(win) {
-        this.removeEventListener('click', arguments.callee);
-        displayWin(win);
+        if(win) {
+          this.removeEventListener('click', arguments.callee);
+          displayWin(win);
+        }
       }
-    }
+    }, 1000);
   });
 }
 
