@@ -195,6 +195,7 @@ function init() {
 
     if(win) {
       this.removeEventListener('click', arguments.callee);
+      isPC = false;
       displayWin(win);
     }
 
