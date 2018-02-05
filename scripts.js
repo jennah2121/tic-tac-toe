@@ -5,6 +5,7 @@ var winner = 'No One';
 var canvas;
 var ctx;
 var mode;
+var isPC;
 
 document.addEventListener("DOMContentLoaded", function() {
   canvas = document.querySelector('#canvas');
@@ -89,6 +90,9 @@ function chosenMode() {
     if(mode == 'pc') {
       //remove the old click listener so the next choice can be correctly identified
       this.removeEventListener('click', chosenMode);
+
+      //Ensure the PC makes the first move
+      isPC = true;
 
       //Ask user to chose their icon
       ctx.fillStyle = 'linen';
@@ -179,6 +183,11 @@ function init() {
   ctx.stroke();
   ctx.closePath();
 
+  //If the mode is PC, make the first PC move
+  if(isPC) {
+    whereClicked();
+  }
+
   //add a click event listener to canvas
   canvas.addEventListener('click', function() {
     whereClicked();
@@ -187,6 +196,17 @@ function init() {
     if(win) {
       this.removeEventListener('click', arguments.callee);
       displayWin(win);
+    }
+
+    // ensures that the PC moves after the player until game over
+    if(isPC) {
+      whereClicked();
+      var win = checkWin();
+
+      if(win) {
+        this.removeEventListener('click', arguments.callee);
+        displayWin(win);
+      }
     }
   });
 }
@@ -197,11 +217,20 @@ function init() {
   also uses the new x and y to determine how the board array should be updated
 */
 function whereClicked() {
-  var x = event.clientX - canvas.offsetLeft;
-  var y = event.clientY - canvas.offsetTop;
+  //varaibles to store location of actual click or values generated for 'click'
+  var x, y;
 
   //variables to determine array indexes of board array to update
   var boardX, boardY;
+
+while(true) {
+  if(isPC) {
+    x = Math.floor(Math.random() * (450 - 0 + 1)) + 0;
+    y = Math.floor(Math.random() * (450 - 0 + 1)) + 0;
+  } else {
+    x = event.clientX - canvas.offsetLeft;
+    y = event.clientY - canvas.offsetTop;
+  }
 
   if(x >=0 && x <= 150) {
     x = 55;
@@ -224,6 +253,12 @@ function whereClicked() {
     y = 395;
     boardY = 2;
   }
+
+  if(board[boardY][boardX] == undefined) {
+    if(mode == 'pc') isPC == true ? isPC = false : isPC = true;
+    break;
+  }
+}
 
   makeMove(x, y, boardX, boardY);
 }
