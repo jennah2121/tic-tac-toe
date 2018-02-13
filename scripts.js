@@ -35,6 +35,8 @@ function restartGame() {
     circle.style.visibility = 'hidden';
     circle.style.animation = 'none';
   }
+  //remove canvas event listener
+  canvas.removeEventListener('click', canvasClick);
 
   gameChoices();
 }
@@ -192,30 +194,32 @@ function init() {
     whereClicked();
   }
 
-  //add a click event listener to canvas
-  canvas.addEventListener('click', function canvasClick() {
-    whereClicked();
-    var win = checkWin(board);
+  canvas.addEventListener('click', canvasClick);
+}
 
-    if(win) {
-      this.removeEventListener('click', canvasClick);
-      isPC = false;
-      displayWin(win);
-    }
+//detect the canvas being clicked
+function canvasClick() {
+  whereClicked();
+  var win = checkWin(board);
 
-    setTimeout(function(){
-      // ensures that the PC moves after the player until game over
-      if(isPC) {
-        whereClicked();
-        var win = checkWin(board);
+  if(win) {
+    this.removeEventListener('click', canvasClick);
+    isPC = false;
+    displayWin(win);
+  }
 
-        if(win) {
-          canvas.removeEventListener('click', canvasClick);
-          displayWin(win);
-        }
+  setTimeout(function(){
+    // ensures that the PC moves after the player until game over
+    if(isPC) {
+      whereClicked();
+      var win = checkWin(board);
+
+      if(win) {
+        canvas.removeEventListener('click', canvasClick);
+        displayWin(win);
       }
-    }, 1000);
-  });
+    }
+  }, 1000);
 }
 
 /*
