@@ -227,11 +227,17 @@ function whereClicked() {
   var boardX, boardY;
 
   if(isPC) {
-    //Play a winning move if one exists
-    var isWinMove = winMovePoss();
+    var isWinMove = winMovePoss(playerTurn);
+    var needToBlock = winMovePoss(playerIcon);
+
     if(isWinMove) {
+      //play a winning move if available
       boardX = isWinMove[0];
       boardY = isWinMove[1];
+    } else if(needToBlock) {
+      //block if opponent needs blocking
+      boardX = needToBlock[0];
+      boardY = needToBlock[1];
     } else {
       //play a random move
       x = Math.floor(Math.random() * (450 - 0 + 1)) + 0;
@@ -272,7 +278,7 @@ function whereClicked() {
 }
 
 // PC will check for a winning move and play that move if it exists
-function winMovePoss() {
+function winMovePoss(icon) {
   //create copy of board values
   var testBoard = [];
   for (var x = 0; x < board.length; x++) {
@@ -282,8 +288,10 @@ function winMovePoss() {
   for(var i=0; i<3; i++) {
     for(var j=0; j<3; j++) {
       if(testBoard[i][j] == undefined) {
-        testBoard[i][j] = playerTurn;
+        testBoard[i][j] = icon;
         if(checkWin(testBoard)) {
+          //reset winner as move was a simulated one
+          winner = 'No One';
           //j is boardX val, i is boardY val
           return [j, i];
         }
