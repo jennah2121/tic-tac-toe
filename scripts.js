@@ -189,12 +189,12 @@ function init() {
   }
 
   //add a click event listener to canvas
-  canvas.addEventListener('click', function() {
+  canvas.addEventListener('click', function canvasClick() {
     whereClicked();
     var win = checkWin(board);
 
     if(win) {
-      this.removeEventListener('click', arguments.callee);
+      this.removeEventListener('click', canvasClick);
       isPC = false;
       displayWin(win);
     }
@@ -206,7 +206,7 @@ function init() {
         var win = checkWin(board);
 
         if(win) {
-          this.removeEventListener('click', arguments.callee);
+          canvas.removeEventListener('click', canvasClick);
           displayWin(win);
         }
       }
