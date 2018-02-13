@@ -11,29 +11,33 @@ document.addEventListener("DOMContentLoaded", function() {
   canvas = document.querySelector('#canvas');
   ctx = canvas.getContext('2d');
 
-var restart = document.querySelector('#restart');
- restart.addEventListener('click', function() {
-   //reset certain variables for purposes of new game
-   board = [[],[],[]];
-   playerTurn = 'X';
-   winner = 'No One';
-
-   document.querySelector('#turn').style.visibility = 'visible';
-   document.querySelector('#turn').innerHTML = 'X starts';
-
-   //reset and hide the circles
-   var circles = document.querySelectorAll('.circle');
-   for(var circle of circles) {
-     circle.style.visibility = 'hidden';
-     circle.style.animation = 'none';
-   }
-   gameChoices();
- });
+  var restart = document.querySelector('#restart');
+  restart.addEventListener('click', restartGame);
 
  gameChoices();
 });
 
 /* FUNCTIONS */
+
+//restarts the game
+function restartGame() {
+  //reset certain variables for purposes of new game
+  board = [[],[],[]];
+  playerTurn = 'X';
+  winner = 'No One';
+
+  document.querySelector('#turn').style.visibility = 'visible';
+  document.querySelector('#turn').innerHTML = 'X starts';
+
+  //reset and hide the circles
+  var circles = document.querySelectorAll('.circle');
+  for(var circle of circles) {
+    circle.style.visibility = 'hidden';
+    circle.style.animation = 'none';
+  }
+
+  gameChoices();
+}
 
 /*
   gameChoices() - Lets user chose to play against the PC or with a friend
@@ -432,6 +436,9 @@ function endGame() {
   if(loser) ctx.fillText(`${loser} loses`, canvas.width/2, 380);
 
   document.querySelector('#turn').style.visibility = 'hidden';
+
+  //automatically restart the game
+  setTimeout(restartGame, 4500);
 }
 
 /*
