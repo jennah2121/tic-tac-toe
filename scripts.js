@@ -312,18 +312,30 @@ function winMovePoss(icon) {
 //Draws an X or O to canvas depending on whose turn it is & updates board array
 function makeMove(x, y, boardX, boardY) {
   ctx.font = '80px Amatic Sc';
+  var turn = document.querySelector('#turn');
 
 if(!board[boardY][boardX]) {
     if(playerTurn == 'X') {
       ctx.fillText('X', x, y);
       board[boardY][boardX] = 'X';
       playerTurn = 'O';
-      document.querySelector('#turn').innerHTML = 'O\'s turn ';
+
+      if(mode == 'pc') {
+        isPC == true ? turn.innerHTML = 'PC\'s turn ' : turn.innerHTML = 'Your turn ';
+      } else {
+        turn.innerHTML = 'O\'s turn ';
+      }
+
     } else {
       ctx.fillText('O', x, y);
       board[boardY][boardX] = 'O';
       playerTurn = 'X';
-      document.querySelector('#turn').innerHTML = 'X\'s turn ';
+
+      if(mode == 'pc') {
+        isPC == true ? turn.innerHTML = 'PC\'s turn ' : turn.innerHTML = 'Your turn ';
+      } else {
+        turn.innerHTML = 'X\'s turn ';
+      }
     }
   }
 }
