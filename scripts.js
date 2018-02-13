@@ -1,7 +1,9 @@
 //global variables
 var playerTurn = 'X';
+var playerIcon;
 var board = [[],[],[]];
 var winner = 'No One';
+var loser;
 var canvas;
 var ctx;
 var mode;
@@ -424,6 +426,18 @@ function displayWin(winType) {
   ctx.stroke();
   ctx.closePath();
 
+  if(mode != 'pc') {
+    if(winner == 'X') loser = 'O';
+    if(winner == 'O') loser = 'X';
+  } else {
+    if(winner == playerIcon) {
+      winner = 'You';
+      loser = 'PC';
+    } else if(winner != playerIcon && winner != 'No One') {
+      winner = 'PC'; loser = 'You';
+    }
+  }
+
   document.querySelector('#turn').innerHTML = `${winner} wins!!`;
 
   setTimeout(endGame, 1350, ctx);
@@ -434,11 +448,6 @@ function displayWin(winType) {
   endGame() - redraws the canvas to show which player won
 */
 function endGame() {
-  var loser;
-
-  if(winner == 'X') loser = 'O';
-  if(winner == 'O') loser = 'X';
-
   ctx.fillStyle = 'linen';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = 'limegreen';
