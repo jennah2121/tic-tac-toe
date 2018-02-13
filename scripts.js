@@ -8,6 +8,7 @@ var canvas;
 var ctx;
 var mode;
 var isPC;
+var winText;
 
 document.addEventListener("DOMContentLoaded", function() {
   canvas = document.querySelector('#canvas');
@@ -438,7 +439,9 @@ function displayWin(winType) {
     }
   }
 
-  document.querySelector('#turn').innerHTML = `${winner} wins!!`;
+  winner == 'You' ? winText = 'win!' : winText = 'wins!'
+
+  document.querySelector('#turn').innerHTML = `${winner} ${winText}!`;
 
   setTimeout(endGame, 1350, ctx);
   setTimeout(showCircles);
@@ -448,6 +451,10 @@ function displayWin(winType) {
   endGame() - redraws the canvas to show which player won
 */
 function endGame() {
+  var loserText;
+  winner == 'You' ? loserText = 'loses!' : loserText = 'lose!'
+
+
   ctx.fillStyle = 'linen';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = 'limegreen';
@@ -455,10 +462,10 @@ function endGame() {
   ctx.font = '150px londrina Shadow';
   ctx.fillText(`${winner}`, canvas.width/2, 200);
   ctx.font = '90px londrina Shadow';
-  ctx.fillText('WINS!!', canvas.width/2, 300);
+  ctx.fillText(`${winText}!`, canvas.width/2, 300);
   ctx.font = '35px Amatic SC';
   ctx.fillStyle = 'red';
-  if(loser) ctx.fillText(`${loser} loses`, canvas.width/2, 380);
+  if(loser) ctx.fillText(`${loser} ${loserText}`, canvas.width/2, 380);
 
   document.querySelector('#turn').style.visibility = 'hidden';
 
@@ -478,6 +485,6 @@ function showCircles() {
     num++;
     circle.style.visibility = 'visible';
     circle.style.animation = `riseUp ${speeds[num]} infinite alternate linear`;
-    winner == 'No One' ? circle.innerHTML = winner : circle.innerHTML = `${winner} wins!`
+    winner == 'No One' ? circle.innerHTML = winner : circle.innerHTML = `${winner} ${winText}`
   }
 }
