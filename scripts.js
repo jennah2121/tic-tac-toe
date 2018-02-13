@@ -29,7 +29,7 @@ function restartGame() {
   playerTurn = 'X';
   winner = 'No One';
 
-  document.querySelector('#turn').style.visibility = 'visible';
+  document.querySelector('#turn').style.visibility = 'hidden';
   document.querySelector('#turn').innerHTML = 'X starts';
 
   //reset and hide the circles
@@ -191,6 +191,9 @@ function init() {
   ctx.lineTo(450, 300);
   ctx.stroke();
   ctx.closePath();
+
+  //display h2 text
+  document.querySelector('#turn').style.visibility = 'visible';
 
   //If the mode is PC, make the first PC move
   if(isPC) {
