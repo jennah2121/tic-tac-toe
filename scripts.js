@@ -132,7 +132,7 @@ function iconSelection() {
 
   if(playerIcon) {
       playerIcon == 'left' ? (playerTurn = 'O', playerIcon = 'X' ): (playerTurn = 'X', playerIcon = 'O');
-      this.removeEventListener('click', arguments.callee);
+      this.removeEventListener('click', iconSelection);
       ctx.fillStyle = 'linen';
       ctx.fillRect(0,0, canvas.width, canvas.height);
       ctx.fillStyle = 'black';
