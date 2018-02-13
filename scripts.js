@@ -226,19 +226,26 @@ function whereClicked() {
   //variables to determine array indexes of board array to update
   var boardX, boardY;
 
-while(true) {
   if(isPC) {
-    x = Math.floor(Math.random() * (450 - 0 + 1)) + 0;
-    y = Math.floor(Math.random() * (450 - 0 + 1)) + 0;
+    //Play a winning move if one exists
+    var isWinMove = winMovePoss();
+    if(isWinMove) {
+      boardX = isWinMove[0];
+      boardY = isWinMove[1];
+    } else {
+      //play a random move
+      x = Math.floor(Math.random() * (450 - 0 + 1)) + 0;
+      y = Math.floor(Math.random() * (450 - 0 + 1)) + 0;
+    }
   } else {
     x = event.clientX - canvas.offsetLeft;
     y = event.clientY - canvas.offsetTop;
   }
 
-  if(x >=0 && x <= 150) {
+  if(x >=0 && x <= 150 || boardX == 0) {
     x = 55;
     boardX = 0;
-  } else if(x >= 151 && x <= 300) {
+  } else if(x >= 151 && x <= 300 || boardX == 1) {
     x = 205;
     boardX = 1;
   } else {
@@ -246,10 +253,10 @@ while(true) {
     boardX = 2;
   }
 
-  if(y >=0 && y <= 150) {
+  if(y >=0 && y <= 150 || boardY == 0) {
     y = 95;
     boardY = 0;
-  } else if(y >= 151 && y <= 300) {
+  } else if(y >= 151 && y <= 300 || boardY == 1) {
     y = 250;
     boardY = 1;
   } else {
@@ -259,11 +266,31 @@ while(true) {
 
   if(board[boardY][boardX] == undefined) {
     if(mode == 'pc') isPC == true ? isPC = false : isPC = true;
-    break;
   }
-}
 
   makeMove(x, y, boardX, boardY);
+}
+
+// PC will check for a winning move and play that move if it exists
+function winMovePoss() {
+  //create copy of board values
+  var testBoard = [];
+  for (var x = 0; x < board.length; x++) {
+    testBoard[x] = board[x].slice();
+  }
+
+  for(var i=0; i<3; i++) {
+    for(var j=0; j<3; j++) {
+      if(testBoard[i][j] == undefined) {
+        testBoard[i][j] = playerTurn;
+        if(checkWin(testBoard)) {
+          //j is boardX val, i is boardY val
+          return [j, i];
+        }
+        testBoard[i][j] = undefined;
+      }
+    }
+  }
 }
 
 //Draws an X or O to canvas depending on whose turn it is & updates board array
